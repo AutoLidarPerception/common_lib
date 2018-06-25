@@ -16,10 +16,10 @@
 
 namespace common {
 
-    template <typename CloudT>
+    template <typename PointT>
     static void publishCloud(const ros::Publisher& publisher,
                              const std_msgs::Header& header,
-                             const CloudT& cloud)
+                             const typename pcl::PointCloud<PointT>& cloud)
     {
         if (cloud.size()) {
             sensor_msgs::PointCloud2 msg_cloud;
@@ -36,9 +36,10 @@ namespace common {
      * @param cloud_clusters
      * @param trans
      */
+    template <typename PointT>
     static void publishClustersCloud(const ros::Publisher& publisher,
                                      const std_msgs::Header& header,
-                                     const std::vector<PointICloudPtr>& clusters_array,
+                                     const std::vector<typename pcl::PointCloud<PointT>::Ptr>& clusters_array,
                                      const Eigen::Matrix4d& trans = Eigen::Matrix4d::Zero())
     {
         if (clusters_array.size() <= 0) {
@@ -82,52 +83,53 @@ namespace common {
             publisher.publish(msg_cloud);
         }
     }
+    static void publishClustersCloud(const ros::Publisher& publisher,
+                                     const std_msgs::Header& header,
+                                     const std::vector<ObjectPtr>& objects_array,
+                                     const Eigen::Matrix4d& trans = Eigen::Matrix4d::Zero())
+    {
+        if (objects_array.size() <= 0) {
+            ROS_WARN("Publish empty clusters cloud.");
+            //publish empty cloud
+            sensor_msgs::PointCloud2 msg_cloud;
+            pcl::toROSMsg(*(new PointICloud), msg_cloud);
+            msg_cloud.header = header;
+            publisher.publish(msg_cloud);
+            return;
+        }
+        else {
+            ROS_INFO_STREAM("Publishing " << objects_array.size() << " clusters in one cloud.");
+        }
 
-//    /**
-//     * @brief publish self-defined clouds array
-//     * @tparam CloudT
-//     * @param publisher
-//     * @param header
-//     * @param cloud_segments
-//     */
-//    template <typename CloudT>
-//    static void publishSegmentsArray(const ros::Publisher& publisher,
-//                                     const std_msgs::Header& header,
-//                                     const std::vector<CloudT>& cloud_segments)
-//    {
-//        if (cloud_segments.size() <= 0) {
-//            ROS_WARN("Publish empty result segments.");
-//            //publish empty cloud array
-//            lidartld_msgs::PointCloud2Array segments_msg;
-//            segments_msg.header = header;
-//            publisher.publish(segments_msg);
-//
-//            return;
-//        }
-//        else {
-//            ROS_INFO_STREAM("Publishing " << cloud_segments.size() << " segments.");
-//        }
-//
-//        lidartld_msgs::PointCloud2Array segments_msg;
-//        std::vector<sensor_msgs::PointCloud2> clouds;
-//
-//        for (size_t idx = 0u; idx < cloud_segments.size(); ++idx) {
-//            if (cloud_segments[idx]->points.size() <= 0) {
-//                ROS_WARN_STREAM("An empty Segment #" << idx << ".");
-//                continue;
-//            }
-//            sensor_msgs::PointCloud2 cloud;
-//            pcl::toROSMsg(*cloud_segments[idx], cloud);
-//            clouds.push_back(cloud);
-//        }
-//
-//        if (clouds.size()) {
-//            segments_msg.header = header;
-//            segments_msg.clouds = clouds;
-//
-//            publisher.publish(segments_msg);
-//        }
-//    }
+        PointICloudPtr cloud(new PointICloud);
+        // different clusters with different intensity
+        float step_i = 255.0f / objects_array.size();
+        for (size_t cluster_idx = 0u; cluster_idx < objects_array.size(); ++cluster_idx) {
+            PointICloudConstPtr cloud_tmp(objects_array[cluster_idx]->cloud);
+            if (cloud_tmp->points.size() <= 0) {
+                ROS_WARN_STREAM("An empty cluster #" << cluster_idx << ".");
+                continue;
+            }
+            for (size_t idx = 0u; idx < cloud_tmp->points.size(); ++idx) {
+                PointI point;
+                point.x = cloud_tmp->points[idx].x;
+                point.y = cloud_tmp->points[idx].y;
+                point.z = cloud_tmp->points[idx].z;
+                point.intensity = cluster_idx * step_i;
+                cloud->points.push_back(point);
+            }
+        }
+        if ((trans.array() != 0.0).any()) {
+            common::transform::transformPointCloud<PointI>(trans, cloud);
+        }
+
+        if (cloud->size()) {
+            sensor_msgs::PointCloud2 msg_cloud;
+            pcl::toROSMsg(*cloud, msg_cloud);
+            msg_cloud.header = header;
+            publisher.publish(msg_cloud);
+        }
+    }
 
     /**
      * @brief publish Objects' 3D OBB and velocity arrow
@@ -375,6 +377,87 @@ namespace common {
         }
         publisher.publish(cluster_markers);
     }
+
+
+//    /**
+//     * @brief publish self-defined clouds array
+//     * @tparam CloudT
+//     * @param publisher
+//     * @param header
+//     * @param cloud_segments
+//     */
+//    template <typename CloudT>
+//    static void publishSegmentsArray(const ros::Publisher& publisher,
+//                                     const std_msgs::Header& header,
+//                                     const std::vector<CloudT>& cloud_segments)
+//    {
+//        if (cloud_segments.size() <= 0) {
+//            ROS_WARN("Publish empty result segments.");
+//            //publish empty cloud array
+//            lidartld_msgs::PointCloud2Array segments_msg;
+//            segments_msg.header = header;
+//            publisher.publish(segments_msg);
+//
+//            return;
+//        }
+//        else {
+//            ROS_INFO_STREAM("Publishing " << cloud_segments.size() << " segments.");
+//        }
+//
+//        lidartld_msgs::PointCloud2Array segments_msg;
+//        std::vector<sensor_msgs::PointCloud2> clouds;
+//
+//        for (size_t idx = 0u; idx < cloud_segments.size(); ++idx) {
+//            if (cloud_segments[idx]->points.size() <= 0) {
+//                ROS_WARN_STREAM("An empty Segment #" << idx << ".");
+//                continue;
+//            }
+//            sensor_msgs::PointCloud2 cloud;
+//            pcl::toROSMsg(*cloud_segments[idx], cloud);
+//            clouds.push_back(cloud);
+//        }
+//
+//        if (clouds.size()) {
+//            segments_msg.header = header;
+//            segments_msg.clouds = clouds;
+//
+//            publisher.publish(segments_msg);
+//        }
+//    }
+//void SegBasedDetector::publishResultSegments(const std_msgs::Header& header,
+//                                       const std::vector<ObjectPtr>& obj_clusters)
+//{
+//    if (obj_clusters.size() <= 0) {
+//        ROS_WARN("Publish empty result segments.");
+//        return;
+//    }
+//    else {
+//        ROS_INFO_STREAM("Publishing " << obj_clusters.size() << " segments.");
+//    }
+//
+//    lidartld_msgs::PointCloud2Array clouds_msg;
+//    std::vector<sensor_msgs::PointCloud2> clouds;
+//
+//    for (size_t obj_idx = 0; obj_idx < obj_clusters.size(); obj_idx++) {
+//        if (obj_clusters[obj_idx]->cloud->points.size() <= 0) {
+//            ROS_WARN_STREAM("An empty Segment #" << obj_idx << ".");
+//            continue;
+//        }
+//        sensor_msgs::PointCloud2 cloud;
+//        pcl::toROSMsg(*obj_clusters[obj_idx]->cloud, cloud);
+//        clouds.push_back(cloud);
+//    }
+//
+//    if (clouds.size()) {
+//        clouds_msg.header.frame_id = frame_id_;
+//        clouds_msg.header.stamp = header.stamp;
+//
+//        clouds_msg.header = header;
+//        clouds_msg.clouds = clouds;
+//
+//        result_segments_pub_.publish(clouds_msg);
+//    }
+//}
 }
 
 #endif /* _PUBLISHER_HPP_ */
