@@ -32,8 +32,8 @@
 * /mixer/matching/HungarianOptimizer.java
 ****************************************************************************/
 
-#ifndef HUNGARIAN_BIGRAPH_MATCHER_HPP_
-#define HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#ifndef _HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#define _HUNGARIAN_BIGRAPH_MATCHER_HPP_
 
 #include <vector>
 
@@ -265,4 +265,4 @@ namespace common {
     }
 }
 
-#endif /* HUNGARIAN_BIGRAPH_MATCHER_HPP_ */
+#endif /* _HUNGARIAN_BIGRAPH_MATCHER_HPP_ */

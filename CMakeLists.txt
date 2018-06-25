@@ -30,7 +30,6 @@ find_package(PCL 1.8 REQUIRED COMPONENTS
     common
     io
     filter
-    # convex_hullxy
     surface
 )
 add_definitions(${PCL_DEFINITIONS})
