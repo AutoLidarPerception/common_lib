@@ -17,14 +17,16 @@
 #ifndef TRACKABLE_OBJECT_HPP_
 #define TRACKABLE_OBJECT_HPP_
 
+#include "../geometry.hpp"
 #include "./object.hpp"
 #include "./type.h"
-#include "../geometry.hpp"
 
-//TODO 引入“锚点”观测
+// TODO 引入“锚点”观测
 struct TrackableObject {
-    /* NEED TO NOTICE: All the states of track would be collected mainly based on
-     * the states of tracked object. Thus, update tracked object's state when you
+    /* NEED TO NOTICE: All the states of track would be collected mainly based
+     * on
+     * the states of tracked object. Thus, update tracked object's state when
+     * you
      * update the state of track !!! */
     TrackableObject() = default;
 
@@ -35,25 +37,26 @@ struct TrackableObject {
      *  init velocity/acceleration/velocity_uncertainty
      * @param obj_ptr
      */
-    explicit TrackableObject(ObjectPtr obj_ptr)
-            : object_ptr(obj_ptr)
-    {
+    explicit TrackableObject(ObjectPtr obj_ptr) : object_ptr(obj_ptr) {
         if (object_ptr != nullptr) {
             ground_center = object_ptr->ground_center.cast<float>();
-            size = Eigen::Vector3f(object_ptr->length, object_ptr->width, object_ptr->height);
+            size = Eigen::Vector3f(object_ptr->length, object_ptr->width,
+                                   object_ptr->height);
             direction = object_ptr->direction.cast<float>();
 
-            //TODO 初始化重心
-            barycenter = common::geometry::getCloudBarycenter<PointI>(object_ptr->cloud).cast<float>();
+            // TODO 初始化重心
+            barycenter =
+                common::geometry::getCloudBarycenter<PointI>(object_ptr->cloud)
+                    .cast<float>();
 
-            //TODO need HD Map
-            //lane_direction = Eigen::Vector3f::Zero();
+            // TODO need HD Map
+            // lane_direction = Eigen::Vector3f::Zero();
 
             /**
              * @brief initial state
              * @note bary center as anchor point
              */
-            //TODO 重心作为锚点
+            // TODO 重心作为锚点
             anchor_point = barycenter;
             velocity = Eigen::Vector3f::Zero();
             acceleration = Eigen::Vector3f::Zero();
@@ -68,8 +71,7 @@ struct TrackableObject {
      * @brief deep copy of Trackable object
      * @param rhs
      */
-    void clone(const TrackableObject& rhs)
-    {
+    void clone(const TrackableObject& rhs) {
         *this = rhs;
         object_ptr.reset(new Object());
         object_ptr->clone(*rhs.object_ptr);
@@ -83,8 +85,8 @@ struct TrackableObject {
     Eigen::Vector3f direction;
     // 重心
     Eigen::Vector3f barycenter;
-    //TODO lane direction needs HD Map
-    //Eigen::Vector3f lane_direction;
+    // TODO lane direction needs HD Map
+    // Eigen::Vector3f lane_direction;
     // states 每个追踪器追踪的物体状态估计(锚点+速度+加速度)
     Eigen::Vector3f anchor_point;
     Eigen::Vector3f velocity;
@@ -100,4 +102,4 @@ struct TrackableObject {
 typedef std::shared_ptr<TrackableObject> TrackableObjectPtr;
 typedef std::shared_ptr<const TrackableObject> TrackableObjectConstPtr;
 
-#endif  /* TRACKABLE_OBJECT_HPP_ */
+#endif /* TRACKABLE_OBJECT_HPP_ */

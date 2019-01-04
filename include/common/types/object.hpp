@@ -17,10 +17,10 @@
 #ifndef _OBJECT_HPP_
 #define _OBJECT_HPP_
 
-#include "./type.h"
-#include "./feature.hpp"
-#include <pcl/io/io.h>              /* pcl::copyPointCloud */
+#include <pcl/io/io.h> /* pcl::copyPointCloud */
 #include <Eigen/Core>
+#include "./feature.hpp"
+#include "./type.h"
 
 using Eigen::Vector3d;
 
@@ -28,16 +28,15 @@ typedef PointCloud PolygonType;
 typedef PointDCloud PolygonDType;
 
 struct alignas(16) Object {
-    Object()
-    {
+    Object() {
         ground_center = Vector3d::Zero();
         velocity = Vector3d::Zero();
         direction = Vector3d(1, 0, 0);
 
         cloud.reset(new PointICloud);
 
-        //type = UNKNOWN;
-        //type_probs.resize(MAX_OBJECT_TYPE, 0);
+        // type = UNKNOWN;
+        // type_probs.resize(MAX_OBJECT_TYPE, 0);
 
         /*
          *
@@ -53,18 +52,14 @@ struct alignas(16) Object {
      * @brief deep copy of Object
      * @param rhs
      */
-    void clone(const Object& rhs)
-    {
+    void clone(const Object& rhs) {
         *this = rhs;
-        //TODO pay attention to point when deep copy
+        // TODO pay attention to point when deep copy
         this->cloud.reset(new PointICloud);
         pcl::copyPointCloud<PointI, PointI>(*(rhs.cloud), *cloud);
     }
 
-    void setId(IdType id)
-    {
-        this->id = id;
-    }
+    void setId(IdType id) { this->id = id; }
 
     /*std::string ToString() const
     {
@@ -221,9 +216,9 @@ struct alignas(16) Object {
     // fg/bg flag
     bool is_background = false;
     // Object classification type.
-    //ObjectType type;
+    // ObjectType type;
     // Probability of each type, used for track type.
-    //std::vector<float> type_probs;
+    // std::vector<float> type_probs;
 
     //---------------------- tracking information
     // shape feature used for tracker-observation match
