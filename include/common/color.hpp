@@ -1,5 +1,9 @@
-#ifndef COLOR_HPP_
-#define COLOR_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
 
 namespace autosense {
 namespace common {
@@ -47,7 +51,8 @@ const struct Color CYAN(0.0, 1.0, 1.0);
 const struct Color DARKCYAN(0.0, 0.5, 0.5);
 const struct Color YELLOW(1.0, 1.0, 0.0);
 const struct Color BROWN(0.5, 0.5, 0.0);
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* COLOR_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_

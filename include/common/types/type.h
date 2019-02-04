@@ -1,11 +1,16 @@
-#ifndef _COMMON_TYPE_H_
-#define _COMMON_TYPE_H_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_
+#define COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_
 
-#include <pcl/point_types.h>            /* pcl::PointXYZ */
-#include <pcl/point_cloud.h>            /* pcl::PointCloud */
+#include <pcl/point_cloud.h> /* pcl::PointCloud */
+#include <pcl/point_types.h> /* pcl::PointXYZ */
 #include <Eigen/Core>
-#include <vector>
+#include <string>
 #include <tuple>
+#include <vector>
 
 namespace autosense {
 
@@ -43,7 +48,7 @@ typedef pcl::PointCloud<PointD> PointDCloud;
 typedef PointDCloud::Ptr PointDCloudPtr;
 typedef PointDCloud::ConstPtr PointDCloudConstPtr;
 
-///@brief Object classify type
+/// @brief Object classify type
 typedef enum {
     PEDESTRIAN = 0x01,
     CAR = 0x02,
@@ -56,11 +61,11 @@ typedef enum {
 
 typedef uint32_t IdType;
 #define ID_MAX UINT_MAX
-//poses array
+// poses array
 typedef std::vector<Eigen::Vector3f> Trajectory;
-//trajectory's tracker id and corresponding period
+// trajectory's tracker id and corresponding period
 typedef std::tuple<IdType, double> FixedTrajectory;
-//trajectory's period and corresponding segments' id array
+// trajectory's period and corresponding segments' id array
 typedef std::tuple<double, std::vector<IdType>> FixedTrajectory2;
 
 /**
@@ -91,7 +96,7 @@ struct ROIParams {
     // Vertical range
     float roi_height_below_m;
     float roi_height_above_m;
-}; // struct ROIParams for ROI filter parameters
+};  // struct ROIParams for ROI filter parameters
 
 struct SegmenterParams {
     std::string segmenter_type = "DoNSegmenter";
@@ -131,28 +136,29 @@ struct SegmenterParams {
     // Ground Plane Fitting
     int gpf_sensor_model = 64;
     double gpf_sensor_height = 1.73;
-    //fitting multiple planes
+    // fitting multiple planes
     int gpf_num_segment;
-    //number of iterations
+    // number of iterations
     int gpf_num_iter;
-    //number of points used to estimate the lowest point representative(LPR)
-    //double of senser model???
+    // number of points used to estimate the lowest point representative(LPR)
+    // double of senser model???
     int gpf_num_lpr;
     double gpf_th_lprs;
-    //threshold for points to be considered initial seeds
+    // threshold for points to be considered initial seeds
     double gpf_th_seeds;
-    //ground points threshold distance from the plane <== large to guarantee safe removal
+    // ground points threshold distance from the plane
+    //   <== large to guarantee safe removal
     double gpf_th_gnds;
 
     // Ground RANSAC Segmenter
     double sac_distance_threshold;
     int sac_max_iteration;
     double sac_probability;
-}; // struct SegmenterParams
+};  // struct SegmenterParams
 
 struct FeatureExtractorParams {
     std::string extractor_type;
-    //std::vector<std::string> descriptor_types;
+    // std::vector<std::string> descriptor_types;
 
     /*int n_nearest_neighbours;
     bool enable_two_stage_retrieval;
@@ -163,58 +169,56 @@ struct FeatureExtractorParams {
     bool normalize_eigen_for_knn;
     bool normalize_eigen_for_hard_threshold;
     std::vector<double> max_eigen_features_values;*/
-
-}; // struct FeatureExtractorParams
+};  // struct FeatureExtractorParams
 
 struct ClassifierParams {
     std::string classifier_type;
 
     std::string classifier_model_path;
-    //If true, save model in model specification&timestamps name
+    // If true, save model in model specification&timestamps name
     bool classifier_save;
 
     int classifier_max_num_samples;
 
-    //empty means no need to load, *.xml
+    // empty means no need to load, *.xml
     std::string rf_model_filename;
 
-    //empty means no need to load, *.model
+    // empty means no need to load, *.model
     std::string svm_model_filename;
-    //*.range
+    // *.range
     std::string svm_range_filename;
 
-    // OpenCv random forest parameters.
+    // OpenCV random forest parameters.
     double rf_threshold_to_accept_object;
-    //the depth of the tree
+    // the depth of the tree
     int rf_max_depth;
-    //rf_min_sample_ratio*num_samples==>min sample count
+    // rf_min_sample_ratio*num_samples==>min sample count
     double rf_min_sample_ratio;
-    //regression accuracy: 0->N/A
+    // regression accuracy: 0->N/A
     double rf_regression_accuracy;
-    //compute surrogate split, false->no missing data
+    // compute surrogate split, false->no missing data
     bool rf_use_surrogates;
     // max number of categories (use sub-optimal algorithm for larger numbers)
     int rf_max_categories;
     std::vector<double> rf_priors;
-    //if true then variable importance will be calculated
+    // if true then variable importance will be calculated
     bool rf_calc_var_importance;
-    //number of variables randomly selected at node and used to find the best split(s)
+    // number of variables randomly selected at node
+    //   and used to find the best split(s)
     int rf_n_active_vars;
-    //max number of trees in the forest
+    // max number of trees in the forest
     int rf_max_num_of_trees;
-    //forest accuracy
+    // forest accuracy
     double rf_accuracy;
 
     double svm_threshold_to_accept_object;
     bool svm_find_the_best_training_parameters;
-    //svm features normalized range
+    // svm features normalized range
     double svm_feature_range_lower;
     double svm_feature_range_upper;
-
-}; // struct ClassifierParams
+};  // struct ClassifierParams
 
 struct TrackingWorkerParams {
-
     //----------------- Matcher: tracker<->observed object association
     std::string matcher_method_name = "hungarian_matcher";
     float matcher_match_distance_maximum = 4.0;
@@ -225,7 +229,7 @@ struct TrackingWorkerParams {
     float matcher_histogram_distance_weight = 0.5f;
 
     //----------------- Tracker
-    //Tracker Filter setup
+    // Tracker Filter setup
     std::string filter_method_name = "robust_kalman_filter";
     bool filter_use_adaptive = false;
     double filter_association_score_maximum = matcher_match_distance_maximum;
@@ -234,7 +238,7 @@ struct TrackingWorkerParams {
     float filter_xy_propagation_noise = 10.0f;
     float filter_z_propagation_noise = 10.0f;
     float filter_breakdown_threshold_maximum = 10.0;
-    //Basic Tracker setup
+    // Basic Tracker setup
     int tracker_cached_history_size_maximum = 5;
     int tracker_consecutive_invisible_maximum = 3;
     float tracker_visible_ratio_minimum = 0.6;
@@ -246,15 +250,14 @@ struct TrackingWorkerParams {
     float tracking_histogram_bin_size = 10.;
     int tracking_collect_age_minimum = 1;
     int tracking_collect_consecutive_invisible_maximum = 0;
-
-}; // struct TrackingWorkerParams
+};  // struct TrackingWorkerParams
 
 struct Parameters {
     SegmenterParams segmenter;
     FeatureExtractorParams feature_extractor;
     ClassifierParams classifier;
-}; // struct Parameters, containing all-kind Params
+};  // struct Parameters, containing all-kind Params
 
 }  // namespace autosense
 
-#endif  // _COMMON_TYPE_H_
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_

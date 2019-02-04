@@ -14,11 +14,12 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef _OBJECT_HPP_
-#define _OBJECT_HPP_
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_
 
-#include <pcl/io/io.h> /* pcl::copyPointCloud */
+#include <pcl/io/io.h>  // pcl::copyPointCloud
 #include <Eigen/Core>
+#include <memory>
 #include "common/types/feature.hpp"
 #include "common/types/type.h"
 
@@ -56,7 +57,7 @@ struct alignas(16) Object {
      */
     void clone(const Object& rhs) {
         *this = rhs;
-        // TODO pay attention to point when deep copy
+        // TODO(gary): pay attention to point when deep copy
         this->cloud.reset(new PointICloud);
         pcl::copyPointCloud<PointI, PointI>(*(rhs.cloud), *cloud);
     }
@@ -225,7 +226,7 @@ struct alignas(16) Object {
     //---------------------- tracking information
     // shape feature used for tracker-observation match
     Feature shape_features;
-    ///@note one tracker maintaina tracked trajectory
+    /// @note one tracker maintaina tracked trajectory
     IdType tracker_id = 0;
     // tracking state
     // stable anchor_point during time, e.g., barycenter
@@ -244,4 +245,4 @@ typedef std::shared_ptr<const Object> ObjectConstPtr;
 
 }  // namespace autosense
 
-#endif /* _OBJECT_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_

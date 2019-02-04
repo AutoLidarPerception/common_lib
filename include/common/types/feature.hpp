@@ -1,5 +1,9 @@
-#ifndef _FEATURE_HPP_
-#define _FEATURE_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_
 
 #include <ros/ros.h>
 #include <string>
@@ -71,9 +75,8 @@ class Feature {
 
  private:
     std::vector<FeatureElement> feature_elements_;
-
-}; /* class Feature */
+};
 
 }  // namespace autosense
 
-#endif /* _FEATURE_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_

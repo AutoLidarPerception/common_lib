@@ -34,8 +34,8 @@
 
 #include "common/algos/hungarian_bigraph_matcher.hpp"
 
-#include <iostream> /* NULL */
-#include <limits>   /* std::numeric_limits */
+#include <iostream>  // NULL
+#include <limits>    // std::numeric_limits
 
 namespace autosense {
 namespace common {
@@ -528,11 +528,8 @@ void HungarianBigraphMatcher::find_assignments(std::vector<int> *preimage,
             }
         }
     }
-    // TODO(user)
-    // result_size = std::min(width_, height_);
-    // CHECK image.size() == result_size
-    // CHECK preimage.size() == result_size
 }
-}
-}
+
+}  // namespace algos
+}  // namespace common
 }  // namespace autosense

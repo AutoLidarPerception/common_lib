@@ -1,8 +1,13 @@
-#ifndef _TIME_HPP_
-#define _TIME_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_
 
-#include <ros/ros.h>  /* ros::Time::now() */
-#include <sys/time.h> /* gettimeofday */
+#include <ros/ros.h>   // ros::Time::now()
+#include <sys/time.h>  // gettimeofday
+#include <string>
 
 namespace autosense {
 namespace common {
@@ -21,10 +26,10 @@ class Clock {
     void takeTime() {
         struct timeval end;
         gettimeofday(&end, NULL);
-        cpu_time_ms_ = double(clock() - cpu_start_) / CLOCKS_PER_SEC *
-                       kSecondsToMiliseconds;
+        cpu_time_ms_ = static_cast<double>(clock() - cpu_start_) /
+                       CLOCKS_PER_SEC * kSecondsToMiliseconds;
 
-        long seconds, useconds;
+        uint64_t seconds, useconds;
 
         seconds = end.tv_sec - real_time_start_.tv_sec;
         useconds = end.tv_usec - real_time_start_.tv_usec;
@@ -54,10 +59,11 @@ class Clock {
 };
 
 static std::string getCurrentTimestampString() {
-    long long current_time = ros::Time::now().toSec() * 100;
+    uint64_t current_time = ros::Time::now().toSec() * 100;
     return std::to_string(current_time);
 }
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _TIME_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_

@@ -14,16 +14,17 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef TRACKABLE_OBJECT_HPP_
-#define TRACKABLE_OBJECT_HPP_
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
 
+#include <memory>
 #include "common/geometry.hpp"
 #include "common/object.hpp"
 #include "common/type.h"
 
 namespace autosense {
 
-// TODO 引入“锚点”观测
+// TODO(gary): 引入“锚点”观测
 struct TrackableObject {
     /* NEED TO NOTICE: All the states of track would be collected mainly based
      * on
@@ -46,19 +47,19 @@ struct TrackableObject {
                                    object_ptr->height);
             direction = object_ptr->direction.cast<float>();
 
-            // TODO 初始化重心
+            // 初始化重心
             barycenter =
                 common::geometry::getCloudBarycenter<PointI>(object_ptr->cloud)
                     .cast<float>();
 
-            // TODO need HD Map
+            // TODO(gary): need HD Map
             // lane_direction = Eigen::Vector3f::Zero();
 
             /**
              * @brief initial state
              * @note bary center as anchor point
              */
-            // TODO 重心作为锚点
+            // 重心作为锚点
             anchor_point = barycenter;
             velocity = Eigen::Vector3f::Zero();
             acceleration = Eigen::Vector3f::Zero();
@@ -87,7 +88,7 @@ struct TrackableObject {
     Eigen::Vector3f direction;
     // 重心
     Eigen::Vector3f barycenter;
-    // TODO lane direction needs HD Map
+    // TODO(gary): lane direction needs HD Map
     // Eigen::Vector3f lane_direction;
     // states 每个追踪器追踪的物体状态估计(锚点+速度+加速度)
     Eigen::Vector3f anchor_point;
@@ -98,7 +99,7 @@ struct TrackableObject {
     ObjectType type;
     // association distance, range from 0 to association_score_maximum
     float association_score = 0.0f;
-}; /* struct TrackableObject */
+};  // struct TrackableObject
 
 // 追踪物体
 typedef std::shared_ptr<TrackableObject> TrackableObjectPtr;
@@ -106,4 +107,4 @@ typedef std::shared_ptr<const TrackableObject> TrackableObjectConstPtr;
 
 }  // namespace autosense
 
-#endif /* TRACKABLE_OBJECT_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_

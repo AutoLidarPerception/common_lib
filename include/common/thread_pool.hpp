@@ -1,5 +1,9 @@
-#ifndef THREAD_POOL_HPP
-#define THREAD_POOL_HPP
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_THREAD_POOL_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_THREAD_POOL_HPP_
 
 #include <boost/asio.hpp>
 #include <boost/bind.hpp>
@@ -33,7 +37,8 @@ class ThreadPool {
     boost::asio::io_service io_service_;
     boost::asio::io_service::work work_;
 };
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* THREAD_POOL_HPP */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_THREAD_POOL_HPP_

@@ -32,13 +32,15 @@
 * /mixer/matching/HungarianOptimizer.java
 ****************************************************************************/
 
-#ifndef _HUNGARIAN_BIGRAPH_MATCHER_HPP_
-#define _HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#ifndef COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
 
 #include <vector>
+
 namespace autosense {
 namespace common {
 namespace algos {
+
 class HungarianBigraphMatcher {
     static const int kRowNotFound = -1;
     static const int kColNotFound = -2;
@@ -237,8 +239,9 @@ class HungarianBigraphMatcher {
     std::vector<int> uncov_col_;
     std::vector<int> uncov_row_;
 };
-}
-}
+
+}  // namespace algos
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _HUNGARIAN_BIGRAPH_MATCHER_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_

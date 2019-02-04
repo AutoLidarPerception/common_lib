@@ -1,11 +1,14 @@
-/******************************************************************************
- * Help functions for loading parameters from ROS Parameters Server
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  *
- * ...
- *****************************************************************************/
+ * Help functions for loading parameters from ROS Parameters Server
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_
 
-#ifndef _PARAMETER_HPP_
-#define _PARAMETER_HPP_
+#include <string>
+#include <vector>
 #include "common/types/type.h"
 
 namespace autosense {
@@ -165,7 +168,7 @@ static ClassifierParams getClassfierParams(const ros::NodeHandle& nh,
 
     // empty means no need to load, *.model
     nh.getParam(ns + "/svm_model_filename", params.svm_model_filename);
-    //*.range
+    // *.range
     nh.getParam(ns + "/svm_range_filename", params.svm_range_filename);
 
     //----------------- Random Forest Classifier parameters
@@ -281,7 +284,8 @@ static Parameters getParameters(const ros::NodeHandle& nh,
 
     return params;
 }
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _PARAMETER_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_

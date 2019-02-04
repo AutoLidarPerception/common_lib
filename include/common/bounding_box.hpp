@@ -1,7 +1,14 @@
-#ifndef _BOUNDING_BOX_HPP_
-#define _BOUNDING_BOX_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_BOUNDING_BOX_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_BOUNDING_BOX_HPP_
 
+#include <Eigen/Core>
+#include <algorithm>
 #include <cmath>
+#include <vector>
 
 #include <boost/geometry.hpp>
 #include <boost/geometry/geometries/point_xy.hpp>
@@ -12,7 +19,6 @@
 #include <boost/geometry/geometries/adapted/c_array.hpp>
 BOOST_GEOMETRY_REGISTER_C_ARRAY_CS(cs::cartesian)
 
-#include <Eigen/Core>
 
 #include "common/common.hpp"
 #include "common/types/object.hpp"
@@ -124,8 +130,6 @@ static double bbIoU(const BoundingBox& box1, const BoundingBox& box2) {
  */
 template <typename T>
 Polygon toPolygon(const T& g) {
-    using namespace boost::numeric::ublas;
-    using namespace boost::geometry;
     matrix<double> mref(2, 2);
     mref(0, 0) = cos(g.yaw_rad);
     mref(0, 1) = -sin(g.yaw_rad);
@@ -133,11 +137,11 @@ Polygon toPolygon(const T& g) {
     mref(1, 1) = cos(g.yaw_rad);
 
     matrix<double> corners(2, 4);
-    //-------------(l/2,w/2)(l/2,-w/2)(-l/2,-w/2)(-l/2,w/2)
+    // -------------(l/2,w/2)(l/2,-w/2)(-l/2,-w/2)(-l/2,w/2)
     double data[] = {g.l / 2, g.l / 2,  -g.l / 2, -g.l / 2,
                      g.w / 2, -g.w / 2, -g.w / 2, g.w / 2};
     std::copy(data, data + 8, corners.data().begin());
-    matrix<double> gc = prod(mref, corners);
+    matrix<double> gc = boost::numeric::ublas::prod(mref, corners);
 
     for (int i = 0; i < 4; ++i) {
         gc(0, i) += g.gc_x;
@@ -150,7 +154,7 @@ Polygon toPolygon(const T& g) {
                           {gc(0, 3), gc(1, 3)},
                           {gc(0, 0), gc(1, 0)}};
     Polygon poly;
-    append(poly, points);
+    boost::geometry::append(poly, points);
     return poly;
 }
 
@@ -158,16 +162,15 @@ Polygon toPolygon(const T& g) {
  * @brief Intersection-over-Union
  */
 static double groundBoxIoU(const GroundBox& box1, const GroundBox& box2) {
-    using namespace boost::geometry;
     Polygon gp = toPolygon(box1);
     Polygon dp = toPolygon(box2);
 
     std::vector<Polygon> in, un;
-    intersection(gp, dp, in);
-    union_(gp, dp, un);
+    boost::geometry::intersection(gp, dp, in);
+    boost::geometry::union_(gp, dp, un);
 
-    double inter_area = in.empty() ? 0. : area(in.front());
-    double union_area = area(un.front());
+    double inter_area = in.empty() ? 0. : boost::geometry::area(in.front());
+    double union_area = boost::geometry::area(un.front());
 
     double o = 0.;
     // union
@@ -180,17 +183,16 @@ static double groundBoxIoU(const GroundBox& box1, const GroundBox& box2) {
 }
 
 static bool groundBoxInside(const GroundBox& box1, const GroundBox& box2) {
-    using namespace boost::geometry;
     Polygon gp = toPolygon(box1);
     Polygon dp = toPolygon(box2);
 
     std::vector<Polygon> in;
-    intersection(gp, dp, in);
+    boost::geometry::intersection(gp, dp, in);
     if (in.empty()) {
         return false;
     } else {
-        double inter_area = area(in.front());
-        double box1_area = area(gp);
+        double inter_area = boost::geometry::area(in.front());
+        double box1_area = boost::geometry::area(gp);
         return abs(box1_area - inter_area) < EPSILON;
     }
 }
@@ -257,8 +259,9 @@ void computeBboxSizeCenter(PointCloudPtrT cloud,
     *center = dir * ((max_pt[0] + min_pt[0]) * 0.5) +
               ortho_dir * ((max_pt[1] + min_pt[1]) * 0.5) + z_dir * min_pt[2];
 }
-}
-}
+
+}  // namespace bbox
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _BOUNDING_BOX_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_BOUNDING_BOX_HPP_

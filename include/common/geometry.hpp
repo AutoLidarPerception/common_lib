@@ -1,10 +1,14 @@
-#ifndef _GEOMETRY_HPP_
-#define _GEOMETRY_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_
 
 #include <pcl/point_cloud.h>
 #include <Eigen/Core>
 
-#include "common/types/object.hpp" /* ObjectPtr */
+#include "common/types/object.hpp"  // ObjectPtr
 
 namespace autosense {
 namespace common {
@@ -121,8 +125,9 @@ static double calcYaw4DirectionVector(const VectorT& dir) {
     const Eigen::Vector3d coord_dir(1.0, 0.0, 0.0);
     return computeTheta2dXyBetweenVectors<Eigen::Vector3d>(coord_dir, dir);
 }
-}
-}
+
+}  // namespace geometry
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _GEOMETRY_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_

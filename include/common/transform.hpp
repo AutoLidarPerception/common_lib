@@ -1,15 +1,20 @@
-#ifndef _TRANSFORM_HPP_
-#define _TRANSFORM_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_TRANSFORM_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_TRANSFORM_HPP_
 
-#include <geometry_msgs/Point.h> /* geometry_msgs::Point */
+#include <geometry_msgs/Point.h>  // geometry_msgs::Point
 #include <ros/ros.h>
-#include <tf/transform_listener.h>   /* tf::TransformListener */
-#include <tf_conversions/tf_eigen.h> /* tf::transformTFToEigen */
+#include <tf/transform_listener.h>    // tf::TransformListener
+#include <tf_conversions/tf_eigen.h>  // tf::transformTFToEigen
 
 #include <Eigen/Core>
 #include <string>
+#include <vector>
 
-#include "common/types/object.hpp" /* ObjectPtr */
+#include "common/types/object.hpp"  // ObjectPtr
 
 namespace autosense {
 namespace common {
@@ -108,7 +113,7 @@ static void transformPointCloud(
 template <typename PointT>
 static void transformPointCloud(
     const Eigen::Matrix4d& trans_mat,
-    typename pcl::PointCloud<PointT>& cloud_in_out) {
+    typename pcl::PointCloud<PointT>& cloud_in_out) {  // NOLINT
     for (size_t i = 0u; i < cloud_in_out.size(); ++i) {
         PointT& p = cloud_in_out.at(i);
         Eigen::Vector4d v(p.x, p.y, p.z, 1.);
@@ -146,8 +151,9 @@ static void transformBuiltObjects(const Eigen::Matrix4d& transform_to_mat,
         transformBuiltObject(transform_to_mat, (*objects)[i]);
     }
 }
-}
-}
+
+}  // namespace transform
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _TRANSFORM_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_TRANSFORM_HPP_

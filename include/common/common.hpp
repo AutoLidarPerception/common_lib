@@ -1,14 +1,20 @@
-#ifndef _COMMON_HPP_
-#define _COMMON_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_COMMON_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_COMMON_HPP_
 
 #include <ros/ros.h>
 
-#include <pcl/common/centroid.h>   /* pcl::compute3DCentroid */
-#include <pcl/common/transforms.h> /* pcl::transformPointCloud */
-#include <pcl/io/pcd_io.h>         /* pcl::io::savePCDFileASCII */
-
-#include <math.h> /* sqrt, pow */
+#include <pcl/common/centroid.h>    // pcl::compute3DCentroid
+#include <pcl/common/transforms.h>  // pcl::transformPointCloud
+#include <pcl/io/pcd_io.h>          // pcl::io::savePCDFileASCII
 #include <Eigen/Core>
+#include <cmath>  // sqrt, pow
+#include <string>
+#include <utility>
+#include <vector>
 
 #include "common/types/type.h"
 
@@ -35,7 +41,7 @@ bool sortByObjSizeDesc(ObjType obj1, ObjType obj2) {
 
 /// \brief Utility function for swapping two values.
 template <typename T>
-bool swap_if_gt(T& a, T& b) {
+bool swap_if_gt(T& a, T& b) {  // NOLINT
     if (a > b) {
         std::swap(a, b);
         return true;
@@ -56,7 +62,8 @@ static void loadPCDModel(PointICloudPtr pc, const std::string& model_name) {
     ROS_INFO_STREAM("PCD Model " << model_name << " loaded.");
 }
 
-static bool loadPCDModel(PointCloudPtr pc, Eigen::Affine3f& model2world) {
+static bool loadPCDModel(PointCloudPtr pc,
+                         Eigen::Affine3f& model2world) {  // NOLINT
     std::string pcd_model_file =
         "/home/gary/Workspace/intern_ws/pcl_learning/model.pcd";
     if (pcl::io::loadPCDFile<Point>(pcd_model_file, *pc) == -1) {
@@ -106,15 +113,19 @@ static void displayPerformances(unsigned int tp,
     ROS_INFO_STREAM("TP: " << tp << ", TN: " << tn << ", FP: " << fp
                            << ", FN: " << fn << ".");
 
-    const double true_positive_rate = double(tp) / double(tp + fn);
-    const double true_negative_rate = double(tn) / double(fp + tn);
+    const double true_positive_rate =
+        static_cast<double>(tp) / static_cast<double>(tp + fn);
+    const double true_negative_rate =
+        static_cast<double>(tn) / static_cast<double>(fp + tn);
     const double false_positive_rate = 1.0 - true_negative_rate;
 
-    ROS_INFO_STREAM("Accuracy (ACC): " << double(tp + tn) /
-                                              double(tp + fp + tn + fn));
+    ROS_INFO_STREAM(
+        "Accuracy (ACC): " << static_cast<double>(tp + tn) /
+                                  static_cast<double>(tp + fp + tn + fn));
     ROS_INFO_STREAM("Sensitivity (TPR): " << true_positive_rate);
     ROS_INFO_STREAM("Specificity (TNR): " << true_negative_rate);
-    ROS_INFO_STREAM("Precision: " << double(tp) / double(tp + fp));
+    ROS_INFO_STREAM("Precision: " << static_cast<double>(tp) /
+                                         static_cast<double>(tp + fp));
     ROS_INFO_STREAM("Positive likelyhood ratio: " << true_positive_rate /
                                                          false_positive_rate);
 }
@@ -141,7 +152,8 @@ static void displayModelInfo(const VolumetricModelType& model) {
 
 //----------------------------------- math utils
 static float toRad(float degree) { return degree * (M_PI / 180.f); }
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _COMMON_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_COMMON_HPP_

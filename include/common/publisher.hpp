@@ -1,17 +1,21 @@
-#ifndef _PUBLISHER_HPP_
-#define _PUBLISHER_HPP_
+/*
+ * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
+ * Gary Chan <chenshj35@mail2.sysu.edu.cn>
+ */
+#ifndef COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
+#define COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
 
+#include <pcl/common/common.h>  // pcl::getMinMax3D
 #include <ros/ros.h>
-#include <sensor_msgs/PointCloud2.h> /* std_msgs, sensor_msgs */
-#include <std_msgs/ColorRGBA.h>      /* std_msgs::ColorRGBA */
+#include <sensor_msgs/PointCloud2.h>  // std_msgs, sensor_msgs
+#include <std_msgs/ColorRGBA.h>       // std_msgs::ColorRGBA
 #include <std_msgs/Header.h>
-#include <visualization_msgs/MarkerArray.h> /* visualization_msgs::MarkerArray */
+#include <visualization_msgs/MarkerArray.h>  // visualization_msgs::MarkerArray
+#include <vector>
 
-#include <pcl/common/common.h> /* pcl::getMinMax3D */
-
-#include "common/geometry.hpp"  /* common::geometry::calcYaw4DirectionVector */
-#include "common/transform.hpp" /* common::transform::transformPointCloud */
-#include "common/types/object.hpp" /* ObjectPtr */
+#include "common/geometry.hpp"      // common::geometry::calcYaw4DirectionVector
+#include "common/transform.hpp"     // common::transform::transformPointCloud
+#include "common/types/object.hpp"  // ObjectPtr
 #include "common/types/type.h"
 
 namespace autosense {
@@ -567,7 +571,8 @@ static void publishMinMaxMarkers(
     }
     publisher.publish(cluster_markers);
 }
-}
+
+}  // namespace common
 }  // namespace autosense
 
-#endif /* _PUBLISHER_HPP_ */
+#endif  // COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
