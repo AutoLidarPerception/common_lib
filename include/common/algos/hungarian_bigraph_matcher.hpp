@@ -36,7 +36,7 @@
 #define _HUNGARIAN_BIGRAPH_MATCHER_HPP_
 
 #include <vector>
-
+namespace autosense {
 namespace common {
 namespace algos {
 class HungarianBigraphMatcher {
@@ -239,5 +239,6 @@ class HungarianBigraphMatcher {
 };
 }
 }
+}  // namespace autosense
 
 #endif /* _HUNGARIAN_BIGRAPH_MATCHER_HPP_ */

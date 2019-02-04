@@ -19,7 +19,7 @@
 
 #include <queue>
 #include <vector>
-
+namespace autosense {
 namespace common {
 namespace algos {
 
@@ -58,5 +58,6 @@ void connectedComponentAnalysis(const std::vector<std::vector<int>>& graph,
 }
 }
 }
+}  // namespace autosense
 
 #endif

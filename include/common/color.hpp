@@ -1,6 +1,7 @@
 #ifndef COLOR_HPP_
 #define COLOR_HPP_
 
+namespace autosense {
 namespace common {
 //----------------------------------- color utils
 /**
@@ -31,6 +32,7 @@ struct Color {
 
     std_msgs::ColorRGBA rgbA;
 };
+
 const struct Color BLACK(0.0, 0.0, 0.0);
 const struct Color WHITE(1.0, 1.0, 1.0);
 const struct Color RED(1.0, 0.0, 0.0);
@@ -46,5 +48,6 @@ const struct Color DARKCYAN(0.0, 0.5, 0.5);
 const struct Color YELLOW(1.0, 1.0, 0.0);
 const struct Color BROWN(0.5, 0.5, 0.0);
 }
+}  // namespace autosense
 
 #endif /* COLOR_HPP_ */

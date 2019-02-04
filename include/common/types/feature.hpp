@@ -5,12 +5,15 @@
 #include <string>
 #include <vector>
 
+namespace autosense {
+
 typedef double FeatureElementType;
 typedef double Label;
 
 struct FeatureElement {
     FeatureElement(std::string feature_name, FeatureElementType feature_value)
         : name(feature_name), value(feature_value) {}
+
     std::string name = "";
     FeatureElementType value = 0.0;
 };
@@ -70,5 +73,7 @@ class Feature {
     std::vector<FeatureElement> feature_elements_;
 
 }; /* class Feature */
+
+}  // namespace autosense
 
 #endif /* _FEATURE_HPP_ */

@@ -37,6 +37,7 @@
 #include <iostream> /* NULL */
 #include <limits>   /* std::numeric_limits */
 
+namespace autosense {
 namespace common {
 namespace algos {
 
@@ -534,3 +535,4 @@ void HungarianBigraphMatcher::find_assignments(std::vector<int> *preimage,
 }
 }
 }
+}  // namespace autosense

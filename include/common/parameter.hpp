@@ -6,9 +6,9 @@
 
 #ifndef _PARAMETER_HPP_
 #define _PARAMETER_HPP_
+#include "common/types/type.h"
 
-#include "./types/type.h"
-
+namespace autosense {
 namespace common {
 
 static VolumetricModelParams getVolumetricModelParams(
@@ -282,5 +282,6 @@ static Parameters getParameters(const ros::NodeHandle& nh,
     return params;
 }
 }
+}  // namespace autosense
 
 #endif /* _PARAMETER_HPP_ */

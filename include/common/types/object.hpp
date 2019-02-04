@@ -19,8 +19,10 @@
 
 #include <pcl/io/io.h> /* pcl::copyPointCloud */
 #include <Eigen/Core>
-#include "./feature.hpp"
-#include "./type.h"
+#include "common/types/feature.hpp"
+#include "common/types/type.h"
+
+namespace autosense {
 
 using Eigen::Vector3d;
 
@@ -239,5 +241,7 @@ struct alignas(16) Object {
 
 typedef std::shared_ptr<Object> ObjectPtr;
 typedef std::shared_ptr<const Object> ObjectConstPtr;
+
+}  // namespace autosense
 
 #endif /* _OBJECT_HPP_ */

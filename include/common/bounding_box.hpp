@@ -14,11 +14,11 @@ BOOST_GEOMETRY_REGISTER_C_ARRAY_CS(cs::cartesian)
 
 #include <Eigen/Core>
 
-#include "./common.hpp"
-#include "./types/object.hpp"
+#include "common/common.hpp"
+#include "common/types/object.hpp"
 
+namespace autosense {
 namespace common {
-
 namespace bbox {
 /*
  *                           |x
@@ -49,7 +49,7 @@ typedef struct {
 } GroundBox;
 
 typedef boost::geometry::model::polygon<
-    boost::geometry::model::d2::point_xy<double> >
+    boost::geometry::model::d2::point_xy<double>>
     Polygon;
 
 /**
@@ -259,5 +259,6 @@ void computeBboxSizeCenter(PointCloudPtrT cloud,
 }
 }
 }
+}  // namespace autosense
 
 #endif /* _BOUNDING_BOX_HPP_ */

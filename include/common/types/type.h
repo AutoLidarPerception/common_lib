@@ -1,11 +1,13 @@
-#ifndef _TYPE_H_
-#define _TYPE_H_
+#ifndef _COMMON_TYPE_H_
+#define _COMMON_TYPE_H_
 
 #include <pcl/point_types.h>            /* pcl::PointXYZ */
 #include <pcl/point_cloud.h>            /* pcl::PointCloud */
 #include <Eigen/Core>
 #include <vector>
 #include <tuple>
+
+namespace autosense {
 
 typedef pcl::PointXYZ Point;
 typedef pcl::PointCloud<Point> PointCloud;
@@ -253,4 +255,6 @@ struct Parameters {
     ClassifierParams classifier;
 }; // struct Parameters, containing all-kind Params
 
-#endif /* _TYPE_H_ */
+}  // namespace autosense
+
+#endif  // _COMMON_TYPE_H_

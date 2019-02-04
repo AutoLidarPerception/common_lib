@@ -9,10 +9,10 @@
 #include <Eigen/Core>
 #include <string>
 
-#include "./types/object.hpp" /* ObjectPtr */
+#include "common/types/object.hpp" /* ObjectPtr */
 
+namespace autosense {
 namespace common {
-
 namespace transform {
 
 static bool getVelodynePose(const tf::TransformListener& tf_buffer,
@@ -96,6 +96,7 @@ static void transformPointCloud(
         // ROS_INFO("Transformed: (%lf, %lf, %lf)", p.x, p.y, p.z);
     }
 }
+
 /**
  * @brief
  *  needed for PointICloud-converted tyoe, can't use Ptr
@@ -147,5 +148,6 @@ static void transformBuiltObjects(const Eigen::Matrix4d& transform_to_mat,
 }
 }
 }
+}  // namespace autosense
 
 #endif /* _TRANSFORM_HPP_ */

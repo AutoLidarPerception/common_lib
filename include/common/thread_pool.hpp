@@ -5,7 +5,9 @@
 #include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 
+namespace autosense {
 namespace common {
+
 class ThreadPool {
  public:
     explicit ThreadPool(size_t size) : work_(io_service_) {
@@ -32,5 +34,6 @@ class ThreadPool {
     boost::asio::io_service::work work_;
 };
 }
+}  // namespace autosense
 
 #endif /* THREAD_POOL_HPP */

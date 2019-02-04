@@ -10,8 +10,9 @@
 #include <math.h> /* sqrt, pow */
 #include <Eigen/Core>
 
-#include "./types/type.h"
+#include "common/types/type.h"
 
+namespace autosense {
 namespace common {
 // float precision
 const float EPSILON = 1e-9;
@@ -141,5 +142,6 @@ static void displayModelInfo(const VolumetricModelType& model) {
 //----------------------------------- math utils
 static float toRad(float degree) { return degree * (M_PI / 180.f); }
 }
+}  // namespace autosense
 
 #endif /* _COMMON_HPP_ */

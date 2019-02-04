@@ -17,9 +17,11 @@
 #ifndef TRACKABLE_OBJECT_HPP_
 #define TRACKABLE_OBJECT_HPP_
 
-#include "../geometry.hpp"
-#include "./object.hpp"
-#include "./type.h"
+#include "common/geometry.hpp"
+#include "common/object.hpp"
+#include "common/type.h"
+
+namespace autosense {
 
 // TODO 引入“锚点”观测
 struct TrackableObject {
@@ -101,5 +103,7 @@ struct TrackableObject {
 // 追踪物体
 typedef std::shared_ptr<TrackableObject> TrackableObjectPtr;
 typedef std::shared_ptr<const TrackableObject> TrackableObjectConstPtr;
+
+}  // namespace autosense
 
 #endif /* TRACKABLE_OBJECT_HPP_ */

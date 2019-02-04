@@ -9,11 +9,12 @@
 
 #include <pcl/common/common.h> /* pcl::getMinMax3D */
 
-#include "./geometry.hpp"     /* common::geometry::calcYaw4DirectionVector */
-#include "./transform.hpp"    /* common::transform::transformPointCloud */
-#include "./types/object.hpp" /* ObjectPtr */
-#include "./types/type.h"
+#include "common/geometry.hpp"  /* common::geometry::calcYaw4DirectionVector */
+#include "common/transform.hpp" /* common::transform::transformPointCloud */
+#include "common/types/object.hpp" /* ObjectPtr */
+#include "common/types/type.h"
 
+namespace autosense {
 namespace common {
 
 template <typename PointT>
@@ -84,6 +85,7 @@ static void publishClustersCloud(
         publisher.publish(msg_cloud);
     }
 }
+
 static void publishClustersCloud(
     const ros::Publisher& publisher,
     const std_msgs::Header& header,
@@ -566,5 +568,6 @@ static void publishMinMaxMarkers(
     publisher.publish(cluster_markers);
 }
 }
+}  // namespace autosense
 
 #endif /* _PUBLISHER_HPP_ */

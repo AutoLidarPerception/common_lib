@@ -4,6 +4,7 @@
 #include <ros/ros.h>  /* ros::Time::now() */
 #include <sys/time.h> /* gettimeofday */
 
+namespace autosense {
 namespace common {
 //----------------------------------- Timer helper class
 class Clock {
@@ -57,5 +58,6 @@ static std::string getCurrentTimestampString() {
     return std::to_string(current_time);
 }
 }
+}  // namespace autosense
 
 #endif /* _TIME_HPP_ */

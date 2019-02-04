@@ -58,6 +58,7 @@
 #include <pcl/surface/convex_hull.h>
 #include <pcl/surface/qhull.h>
 
+namespace autosense {
 namespace common {
 namespace algos {
 /**
@@ -235,5 +236,6 @@ class ConvexHull2DXY : public pcl::ConvexHull<PointT> {
 };
 }
 }
+}  // namespace autosense
 
 #endif /* _CONVEX_HULLXY_HPP_ */

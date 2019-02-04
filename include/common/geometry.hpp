@@ -4,10 +4,10 @@
 #include <pcl/point_cloud.h>
 #include <Eigen/Core>
 
-#include "./types/object.hpp" /* ObjectPtr */
+#include "common/types/object.hpp" /* ObjectPtr */
 
+namespace autosense {
 namespace common {
-
 namespace geometry {
 /**
  * @brief compute velocity's angle change between "v1" and "v2"
@@ -123,5 +123,6 @@ static double calcYaw4DirectionVector(const VectorT& dir) {
 }
 }
 }
+}  // namespace autosense
 
 #endif /* _GEOMETRY_HPP_ */
