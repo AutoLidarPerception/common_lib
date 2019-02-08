@@ -13,17 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-
 #ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
 #define COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
 
 #include <memory>
+
 #include "common/geometry.hpp"
-#include "common/object.hpp"
-#include "common/type.h"
+#include "common/types/object.hpp"
+#include "common/types/type.h"
 
 namespace autosense {
-
 // TODO(gary): 引入“锚点”观测
 struct TrackableObject {
     /* NEED TO NOTICE: All the states of track would be collected mainly based

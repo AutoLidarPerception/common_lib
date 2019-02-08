@@ -157,9 +157,10 @@ struct SegmenterParams {
 };  // struct SegmenterParams
 
 struct FeatureExtractorParams {
-    std::string extractor_type;
     // std::vector<std::string> descriptor_types;
+    std::string extractor_type;
 
+    size_t bin_size_for_histogram;
     /*int n_nearest_neighbours;
     bool enable_two_stage_retrieval;
     int knn_feature_dim;

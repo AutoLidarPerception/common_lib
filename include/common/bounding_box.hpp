@@ -130,6 +130,7 @@ static double bbIoU(const BoundingBox& box1, const BoundingBox& box2) {
  */
 template <typename T>
 Polygon toPolygon(const T& g) {
+    using boost::numeric::ublas::matrix;
     matrix<double> mref(2, 2);
     mref(0, 0) = cos(g.yaw_rad);
     mref(0, 1) = -sin(g.yaw_rad);
