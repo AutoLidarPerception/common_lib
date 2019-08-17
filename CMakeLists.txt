@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
     # ROS core
     roscpp
     # ROS messages
+    message_generation
     std_msgs
     sensor_msgs
     # ROS PCL
@@ -40,6 +41,13 @@ find_package(Eigen3 REQUIRED)
 ###################################
 ## catkin specific configuration ##
 ###################################
+
+## Generate service messages in the 'srvs' folder
+add_subdirectory(srvs)
+
+## Generate messages in the 'msgs' folder
+add_subdirectory(msgs)
+
 ## The catkin_package macro generates cmake config files for your package
 ## Declare things to be passed to dependent projects
 ## INCLUDE_DIRS: uncomment this if your package contains header files
@@ -53,7 +61,6 @@ catkin_package(
     LIBRARIES common_lib
 )
 
-
 ###########
 ## Build ##
 ###########
@@ -66,11 +73,6 @@ include_directories(
     ${Eigen3_INCLUDE_DIRS}
 )
 
-## Declare a C++ executable
-add_library(${PROJECT_NAME}
-    src/algos/hungarian_bigraph_matcher.cpp
-)
-
 ## http://mariobadr.com/creating-a-header-only-library-with-cmake.html
 #add_library(${PROJECT_NAME} INTERFACE)
 #target_include_directories(${PROJECT_NAME} INTERFACE include/common)
@@ -81,6 +83,16 @@ add_library(${PROJECT_NAME}
 #    ${PCL_LIBRARIES}
 #    ${Eigen3_LIBRARIES}
 #)
+
+## Declare a C++ executable
+add_library(${PROJECT_NAME}
+    src/algos/hungarian_bigraph_matcher.cpp
+)
+
+add_dependencies(${PROJECT_NAME}
+    ${GENERATE_SERVICE_MESSAGES}
+    ${GENERATE_MESSAGES}
+)
 
 #############
 ## Install ##

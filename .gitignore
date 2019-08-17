@@ -1,0 +1,7 @@
+# temporary generated msgs/srvs-config files
+msgs/package.xml
+srvs/package.xml
+
+# temporary generated messages-include symlinks
+include/common/msgs/
+include/common/srvs/
