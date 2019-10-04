@@ -2,29 +2,32 @@
  * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
+
 #ifndef COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
 #define COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
+
+#include <std_msgs/ColorRGBA.h>  // std_msgs::ColorRGBA
 
 namespace autosense {
 namespace common {
 //----------------------------------- color utils
 /**
- * 黑色   Black    0   0    0    0
-   白色   White    255    255    255    16777215
-   灰色   Gray    192    192    192    12632256
-   深灰色    Dark    Grey    128    128    128    8421504
-   红色    Red    255    0    0    255
-   深红色    Dark    Red    128    0    0    128
-   绿色    Green    0    255    0    65280
-   深绿色    Dark    Green    0    128    0    32768
-   蓝色    Blue    0    0    255    16711680
-   深蓝色    Dark    Blue    0    0    128    8388608
-   紫红色    Magenta    255    0    255    16711935
-   深紫红    Dark    Magenta    128    0    128    8388736
-   紫色    Cyan    0    255    255    16776960
-   深紫    Dark    Cyan    0    128    128    8421376
-   黄色    Yellow    255    255    0    65535
-   棕色    Brown    128    128    0    32896
+ * Black           0   0    0    0
+   White           255    255    255    16777215
+   Gray            192    192    192    12632256
+   Dark Grey       128    128    128    8421504
+   Red             255    0    0    255
+   Dark Red        128    0    0    128
+   Green           0    255    0    65280
+   Dark Green      0    128    0    32768
+   Blue            0    0    255    16711680
+   Dark Blue       0    0    128    8388608
+   Magenta         255    0    255    16711935
+   Dark Magenta    128    0    128    8388736
+   Cyan            0    255    255    16776960
+   Dark Cyan       0    128    128    8421376
+   Yellow          255    255    0    65535
+   Brown           128    128    0    32896
  */
 struct Color {
     Color(float r, float g, float b) {
