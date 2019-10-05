@@ -70,7 +70,7 @@ static ROIParams getRoiParams(const ros::NodeHandle& nh,
 static SegmenterParams getSegmenterParams(const ros::NodeHandle& nh,
                                           const std::string& ns_prefix) {
     SegmenterParams params;
-    const std::string ns = ns_prefix + "/Segmenters";
+    const std::string ns = ns_prefix + "/Segmenter";
 
     // DoN Segmenter
     nh.getParam(ns + "/segmenter_type", params.segmenter_type);
