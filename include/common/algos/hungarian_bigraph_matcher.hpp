@@ -32,8 +32,8 @@
 * /mixer/matching/HungarianOptimizer.java
 ****************************************************************************/
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#ifndef COMMON_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#define COMMON_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
 
 #include <vector>
 
@@ -244,4 +244,4 @@ class HungarianBigraphMatcher {
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_
+#endif  // COMMON_INCLUDE_COMMON_ALGOS_HUNGARIAN_BIGRAPH_MATCHER_HPP_

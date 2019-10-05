@@ -2,8 +2,9 @@
  * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
-#ifndef COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_
+
+#ifndef COMMON_INCLUDE_COMMON_TIME_HPP_
+#define COMMON_INCLUDE_COMMON_TIME_HPP_
 
 #include <ros/ros.h>   // ros::Time::now()
 #include <sys/time.h>  // gettimeofday
@@ -66,4 +67,4 @@ static std::string getCurrentTimestampString() {
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_TIME_HPP_
+#endif  // COMMON_INCLUDE_COMMON_TIME_HPP_

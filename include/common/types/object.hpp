@@ -14,8 +14,8 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_
+#ifndef COMMON_INCLUDE_COMMON_TYPES_OBJECT_HPP_
+#define COMMON_INCLUDE_COMMON_TYPES_OBJECT_HPP_
 
 #include <pcl/io/io.h>  // pcl::copyPointCloud
 #include <Eigen/Core>
@@ -245,4 +245,4 @@ typedef std::shared_ptr<const Object> ObjectConstPtr;
 
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_OBJECT_HPP_
+#endif  // COMMON_INCLUDE_COMMON_TYPES_OBJECT_HPP_

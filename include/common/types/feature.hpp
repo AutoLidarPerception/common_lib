@@ -2,8 +2,9 @@
  * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
-#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_
+
+#ifndef COMMON_INCLUDE_COMMON_TYPES_FEATURE_HPP_
+#define COMMON_INCLUDE_COMMON_TYPES_FEATURE_HPP_
 
 #include <ros/ros.h>
 #include <string>
@@ -79,4 +80,4 @@ class Feature {
 
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_FEATURE_HPP_
+#endif  // COMMON_INCLUDE_COMMON_TYPES_FEATURE_HPP_

@@ -2,8 +2,9 @@
  * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
-#ifndef COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_
+
+#ifndef COMMON_INCLUDE_COMMON_GEOMETRY_HPP_
+#define COMMON_INCLUDE_COMMON_GEOMETRY_HPP_
 
 #include <pcl/point_cloud.h>
 #include <Eigen/Core>
@@ -130,4 +131,4 @@ static double calcYaw4DirectionVector(const VectorT& dir) {
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_GEOMETRY_HPP_
+#endif  // COMMON_INCLUDE_COMMON_GEOMETRY_HPP_

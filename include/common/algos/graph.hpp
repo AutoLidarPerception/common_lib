@@ -14,8 +14,8 @@
  * limitations under the License.
  *****************************************************************************/
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_ALGOS_GRAPH_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_ALGOS_GRAPH_HPP_
+#ifndef COMMON_INCLUDE_COMMON_ALGOS_GRAPH_HPP_
+#define COMMON_INCLUDE_COMMON_ALGOS_GRAPH_HPP_
 
 #include <queue>
 #include <vector>
@@ -62,4 +62,4 @@ void connectedComponentAnalysis(const std::vector<std::vector<int>>& graph,
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_ALGOS_GRAPH_HPP_
+#endif  // COMMON_INCLUDE_COMMON_ALGOS_GRAPH_HPP_

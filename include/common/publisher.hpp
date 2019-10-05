@@ -3,8 +3,8 @@
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
+#ifndef COMMON_INCLUDE_COMMON_PUBLISHER_HPP_
+#define COMMON_INCLUDE_COMMON_PUBLISHER_HPP_
 
 #include <pcl/common/common.h>  // pcl::getMinMax3D
 #include <ros/ros.h>
@@ -13,6 +13,8 @@
 #include <std_msgs/Header.h>
 #include <visualization_msgs/MarkerArray.h>  // visualization_msgs::MarkerArray
 #include <vector>
+#include <map>
+#include <algorithm>
 
 #include "common/msgs/autosense_msgs/PointCloud2Array.h"
 #include "common/msgs/autosense_msgs/TrackingFixedTrajectoryArray.h"
@@ -493,7 +495,7 @@ static void publishObjectsVelocityArrow(
             // Eigen::Quaternion q = Eigen::AngleAxisd(yaw_rad,
             // Eigen::Vector3f::UnitZ());
             vel_text.pose.orientation.w = yaw_rad;
-            ///@note filter 0.00m/s
+            /// @note filter 0.00m/s
             if (vel_scalar > common::EPSILON) {
                 std::stringstream vel_str;
                 // fixed：表示普通方式输出，不采用科学计数法。
@@ -577,9 +579,12 @@ static void publishObjectsTrajectory(
 
                 trajectory.scale.x = 0.15;
                 trajectory.color.a = 1.0;
-                trajectory.color.r = std::max(0.3, (double)(tid % 3) / 3.0);
-                trajectory.color.g = std::max(0.3, (double)(tid % 6) / 6.0);
-                trajectory.color.b = std::max(0.3, (double)(tid % 9) / 9.0);
+                trajectory.color.r =
+                    std::max(0.3, static_cast<double>(tid % 3) / 3.0);
+                trajectory.color.g =
+                    std::max(0.3, static_cast<double>(tid % 6) / 6.0);
+                trajectory.color.b =
+                    std::max(0.3, static_cast<double>(tid % 9) / 9.0);
 
                 if (!is_offline_keep_alive) {
                     trajectory.lifetime = ros::Duration(0.5);
@@ -804,4 +809,4 @@ static void publishTrackingFixedTrajectories(
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_PUBLISHER_HPP_
+#endif  // COMMON_INCLUDE_COMMON_PUBLISHER_HPP_

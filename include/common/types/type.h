@@ -2,8 +2,9 @@
  * Copyright (C) 2019 by AutoSense Organization. All rights reserved.
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
-#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_
-#define COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_
+
+#ifndef COMMON_INCLUDE_COMMON_TYPES_TYPE_H_
+#define COMMON_INCLUDE_COMMON_TYPES_TYPE_H_
 
 #include <pcl/point_cloud.h> /* pcl::PointCloud */
 #include <pcl/point_types.h> /* pcl::PointXYZ */
@@ -261,4 +262,4 @@ struct Parameters {
 
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_TYPE_H_
+#endif  // COMMON_INCLUDE_COMMON_TYPES_TYPE_H_

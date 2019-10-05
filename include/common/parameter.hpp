@@ -4,8 +4,9 @@
  *
  * Help functions for loading parameters from ROS Parameters Server
  */
-#ifndef COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_
+
+#ifndef COMMON_INCLUDE_COMMON_PARAMETER_HPP_
+#define COMMON_INCLUDE_COMMON_PARAMETER_HPP_
 
 #include <string>
 #include <vector>
@@ -288,4 +289,4 @@ static Parameters getParameters(const ros::NodeHandle& nh,
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_PARAMETER_HPP_
+#endif  // COMMON_INCLUDE_COMMON_PARAMETER_HPP_

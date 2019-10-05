@@ -51,8 +51,8 @@
  *
  */
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_
+#ifndef COMMON_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_
+#define COMMON_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_
 
 #include <pcl/common/centroid.h>  // pcl::compute3DCentroid
 #include <pcl/surface/convex_hull.h>
@@ -243,4 +243,4 @@ class ConvexHull2DXY : public pcl::ConvexHull<PointT> {
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_
+#endif  // COMMON_INCLUDE_COMMON_ALGOS_CONVEX_HULLXY_HPP_

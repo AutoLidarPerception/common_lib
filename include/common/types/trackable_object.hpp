@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *****************************************************************************/
-#ifndef COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
+
+#ifndef COMMON_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
+#define COMMON_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
 
 #include <memory>
 
@@ -106,4 +107,4 @@ typedef std::shared_ptr<const TrackableObject> TrackableObjectConstPtr;
 
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_
+#endif  // COMMON_INCLUDE_COMMON_TYPES_TRACKABLE_OBJECT_HPP_

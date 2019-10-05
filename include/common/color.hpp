@@ -3,8 +3,8 @@
  * Gary Chan <chenshj35@mail2.sysu.edu.cn>
  */
 
-#ifndef COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
-#define COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
+#ifndef COMMON_INCLUDE_COMMON_COLOR_HPP_
+#define COMMON_INCLUDE_COMMON_COLOR_HPP_
 
 #include <std_msgs/ColorRGBA.h>  // std_msgs::ColorRGBA
 
@@ -58,4 +58,4 @@ const struct Color BROWN(0.5, 0.5, 0.0);
 }  // namespace common
 }  // namespace autosense
 
-#endif  // COMMON_LIBS_INCLUDE_COMMON_COLOR_HPP_
+#endif  // COMMON_INCLUDE_COMMON_COLOR_HPP_
