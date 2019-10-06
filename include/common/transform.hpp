@@ -37,12 +37,16 @@ static bool getVelodynePose(const tf::TransformListener& tf_buffer,
         tf_buffer.lookupTransform(target_frame, source_frame, query_stamp,
                                   transform_stamped);
     } catch (tf2::TransformException& ex) {
-        // ROS_ERROR_STREAM("Exception: " << ex.what());
         ROS_WARN(
             "Failed to query pose at %lf, use latest available pose instead.",
             query_time);
-        tf_buffer.lookupTransform(target_frame, source_frame, ros::Time(0),
-                                  transform_stamped);
+        try {
+            tf_buffer.lookupTransform(target_frame, source_frame, ros::Time(0),
+                                      transform_stamped);
+        } catch (tf2::TransformException& ex) {
+            ROS_ERROR_STREAM("Exception: " << ex.what());
+            return false;
+        }
     }
     Eigen::Affine3d affine_3d;
     tf::transformTFToEigen(transform_stamped, affine_3d);

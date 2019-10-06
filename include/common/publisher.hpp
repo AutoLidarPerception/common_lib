@@ -158,7 +158,7 @@ template <typename CloudT>
 static void publishPointCloudArray(const ros::Publisher &publisher,
                                    const std_msgs::Header &header,
                                    const std::vector<CloudT> &segment_array) {
-    if (segment_array.size() <= 0) {
+    if (segment_array.empty()) {
         ROS_WARN("Publish empty result segments.");
         // publish empty cloud array
         autosense_msgs::PointCloud2Array segments_msg;
@@ -794,7 +794,8 @@ static void publishTrackingFixedTrajectories(
     }
 
     if (!trajectories.empty()) {
-        autosense_msgs::TrackingFixedTrajectoryArrayPtr msg;
+        autosense_msgs::TrackingFixedTrajectoryArrayPtr msg(
+            new autosense_msgs::TrackingFixedTrajectoryArray);
         msg->header = header;
         for (size_t i = 0u; i < trajectories.size(); ++i) {
             // tracker id
